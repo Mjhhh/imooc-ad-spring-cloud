@@ -26,7 +26,14 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.31</version>
         </dependency>
+        <!--Hutool Java工具包-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.4.5</version>
+        </dependency>
     </dependencies>
+
 
     <!--
         SpringBoot的Maven插件, 能够以Maven的方式为应用提供SpringBoot的支持，可以将
