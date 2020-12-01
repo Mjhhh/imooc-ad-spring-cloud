@@ -70,8 +70,7 @@ public class AdUnitServiceImpl implements IAdUnitService {
     }
 
     @Override
-    public AdUnitResponse createUnit(AdUnitRequest request)
-            throws AdException {
+    public AdUnitResponse createUnit(AdUnitRequest request) throws AdException {
 
         if (!request.createValidate()) {
             ExceptionCast.cast(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
@@ -109,7 +108,6 @@ public class AdUnitServiceImpl implements IAdUnitService {
 
         List<AdUnitKeyword> unitKeywords = new ArrayList<>();
         if (!CollectionUtils.isEmpty(request.getUnitKeywords())) {
-
             request.getUnitKeywords().forEach(i -> unitKeywords.add(
                     new AdUnitKeyword(i.getUnitId(), i.getKeyword())
             ));
@@ -122,20 +120,19 @@ public class AdUnitServiceImpl implements IAdUnitService {
     }
 
     @Override
-    public AdUnitItResponse createUnitIt(
-            AdUnitItRequest request) throws AdException {
+    public AdUnitItResponse createUnitIt(AdUnitItRequest request) throws AdException {
 
         List<Long> unitIds = request.getUnitIts().stream()
                 .map(AdUnitItRequest.UnitIt::getUnitId)
                 .collect(Collectors.toList());
         if (!isRelatedUnitExist(unitIds)) {
-            throw new AdException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+            ExceptionCast.cast(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
         }
 
         List<AdUnitIt> unitIts = new ArrayList<>();
-        request.getUnitIts().forEach(i -> unitIts.add(
-                new AdUnitIt(i.getUnitId(), i.getItTag())
-        ));
+        request.getUnitIts().forEach(i -> {
+            unitIts.add(new AdUnitIt(i.getUnitId(), i.getItTag()));
+        });
         List<Long> ids = unitItRepository.saveAll(unitIts).stream()
                 .map(AdUnitIt::getId)
                 .collect(Collectors.toList());
@@ -151,13 +148,12 @@ public class AdUnitServiceImpl implements IAdUnitService {
                 .map(AdUnitDistrictRequest.UnitDistrict::getUnitId)
                 .collect(Collectors.toList());
         if (!isRelatedUnitExist(unitIds)) {
-            throw new AdException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+            ExceptionCast.cast(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
         }
 
         List<AdUnitDistrict> unitDistricts = new ArrayList<>();
         request.getUnitDistricts().forEach(d -> unitDistricts.add(
-                new AdUnitDistrict(d.getUnitId(), d.getProvince(),
-                        d.getCity())
+                new AdUnitDistrict(d.getUnitId(), d.getProvince(), d.getCity())
         ));
         List<Long> ids = unitDistrictRepository.saveAll(unitDistricts)
                 .stream().map(AdUnitDistrict::getId)
@@ -178,7 +174,7 @@ public class AdUnitServiceImpl implements IAdUnitService {
                 .collect(Collectors.toList());
 
         if (!(isRelatedUnitExist(unitIds) && isRelatedUnitExist(creativeIds))) {
-            throw new AdException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+            ExceptionCast.cast(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
         }
 
         List<CreativeUnit> creativeUnits = new ArrayList<>();
@@ -187,8 +183,7 @@ public class AdUnitServiceImpl implements IAdUnitService {
         ));
 
         List<Long> ids = creativeUnitRepository.saveAll(creativeUnits)
-                .stream()
-                .map(CreativeUnit::getId)
+                .stream().map(CreativeUnit::getId)
                 .collect(Collectors.toList());
 
         return new CreativeUnitResponse(ids);
@@ -200,8 +195,7 @@ public class AdUnitServiceImpl implements IAdUnitService {
             return false;
         }
 
-        return unitRepository.findAllById(unitIds).size() ==
-                new HashSet<>(unitIds).size();
+        return unitRepository.findAllById(unitIds).size() == new HashSet<>(unitIds).size();
     }
 
     private boolean isRelatedCreativeExist(List<Long> creativeIds) {
@@ -210,7 +204,6 @@ public class AdUnitServiceImpl implements IAdUnitService {
             return false;
         }
 
-        return creativeRepository.findAllById(creativeIds).size() ==
-                new HashSet<>(creativeIds).size();
+        return creativeRepository.findAllById(creativeIds).size() == new HashSet<>(creativeIds).size();
     }
 }

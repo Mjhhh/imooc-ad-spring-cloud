@@ -111,4 +111,6 @@ public class AdPlanServiceImpl implements IAdPlanService {
         adPlan.setUpdateTime(LocalDateTime.now());
         adPlanRepository.save(adPlan);
     }
+
+
 }
