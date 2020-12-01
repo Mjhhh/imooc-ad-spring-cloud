@@ -1,12 +1,13 @@
 package com.imooc.ad.vo;
 
-import com.netflix.discovery.util.StringUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.apache.commons.lang.StringUtils;
 
 @Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateUserRequest {

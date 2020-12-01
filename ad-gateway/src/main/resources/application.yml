@@ -7,3 +7,10 @@ eureka:
   client:
     serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔
       defaultZone: http://localhost:8000/eureka/
+zuul:
+  prefix: /imooc
+  routes:
+    sponsor:
+      path: /ad-sponsor/**
+      serviceId: eureka-client-ad-sponsor
+      strip-prefix: false
