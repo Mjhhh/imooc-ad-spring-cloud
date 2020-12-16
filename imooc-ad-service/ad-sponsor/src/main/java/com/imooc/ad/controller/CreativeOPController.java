@@ -1,6 +1,5 @@
 package com.imooc.ad.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.imooc.ad.service.ICreativeService;
 import com.imooc.ad.vo.CreativeRequest;
 import com.imooc.ad.vo.CreativeResponse;

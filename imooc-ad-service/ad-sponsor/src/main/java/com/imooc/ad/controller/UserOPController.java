@@ -1,6 +1,5 @@
 package com.imooc.ad.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.imooc.ad.exception.AdException;
 import com.imooc.ad.service.IUserService;
 import com.imooc.ad.vo.CreateUserRequest;
