@@ -37,6 +37,7 @@ public class CommonUtils {
     public static Date parseStringDate(String dateString) {
 
         try {
+
             DateFormat dateFormat = new SimpleDateFormat(
                     "EEE MMM dd HH:mm:ss zzz yyyy",
                     Locale.US
